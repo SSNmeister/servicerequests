@@ -9,7 +9,7 @@ const ManpowerRequestForm = () => {
   return (
     <div className="create--request--container">
       <div className="create--request--header--container mb24">
-        <p className="m0 fs24 fw700 mb8 mt60 white create--request--header--font">
+        <p className="m0 fs24 fw700 mb8 mt24 white create--request--header--font">
           Manpower Request Form.
         </p>
         <span className="fs14 fw400 white">
