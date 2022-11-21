@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import { Route, Routes } from "react-router-dom";
 import "./style.css";
 import ManpowerRequestForm from "./ManpowerRequestForm";
+import HomepageWorker from "./HomepageWorker";
 
 export default function App() {
   return (
@@ -10,6 +11,7 @@ export default function App() {
       {/* <Routes> */}
       <Navbar />
       <ManpowerRequestForm />
+      {/* <HomepageWorker /> */}
       {/* </Routes> */}
     </div>
   );

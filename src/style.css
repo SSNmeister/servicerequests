@@ -426,3 +426,66 @@ body {
   border: 1px black solid;
   box-shadow: var(--shadowing);
 }
+
+/* ====================================Home Page ====================================== */
+.homepage--container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.homepage--header--container {
+  display: flex;
+  justify-content: center;
+  width: 370px;
+}
+.homepage--category--container {
+  display: flex;
+  flex-direction: column;
+  width: 370px;
+  align-items: left;
+}
+.category--cards--container {
+  display: flex;
+  flex-direction: row;
+}
+.category--cards--box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: var(--blue);
+  border: 1px solid black;
+  border-radius: 4px;
+  box-shadow: var(--shadowing);
+  height: 85px;
+  width: 85px;
+  color: black;
+  cursor: pointer;
+}
+.homepage--submission--container {
+  display: flex;
+  flex-direction: column;
+  width: 370px;
+}
+.main--buttons--routing--blue {
+  color: black;
+  background-color: var(--blue);
+  border: 1px solid black;
+  border-radius: 4px;
+  box-shadow: var(--shadowing);
+  height: 85px;
+  width: 350px;
+  cursor: pointer;
+}
+.main--buttons--routing--green {
+  color: black;
+  background-color: var(--green);
+  border: 1px solid black;
+  border-radius: 4px;
+  box-shadow: var(--shadowing);
+  height: 85px;
+  width: 350px;
+  cursor: pointer;
+}
