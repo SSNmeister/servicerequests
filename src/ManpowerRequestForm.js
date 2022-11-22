@@ -31,6 +31,7 @@ const ManpowerRequestForm = () => {
   const handleWorker = (details) => {
     const array = [...workers, details];
     setWorkers(array);
+    handleClickWorkers();
   };
 
   //--------------------clear input field---------------------
@@ -159,39 +160,60 @@ const ManpowerRequestForm = () => {
           <span className="fs16 fw700 black mb8 fs12 fw700">
             Worker's Name:
           </span>
-          <div className="add--service--input--forms--full">
-            <img
-              src={downArrow}
-              className="down--arrow"
-              onClick={handleClickWorkers}
-            />
-          </div>
-
-          {openWorkers && (
-            <div className="add--service--input--forms--full--workers">
-              {dummyData.map((worker) => {
-                return (
-                  <div
-                    className="add--service--input--forms--full--workers--individual white fs16"
-                    onClick={() => {
-                      handleWorker(worker.name);
-                    }}
-                  >
-                    {worker.name}
-                  </div>
-                );
+          {workers && (
+            <div>
+              {workers.map((worker) => {
+                return <div className="added--workers--forms">{worker}</div>;
               })}
             </div>
           )}
+
+          <div className=" add--service--input--forms--full--container">
+            <div
+              className="add--service--input--forms--full"
+              onClick={handleClickWorkers}
+            >
+              <img src={downArrow} className="down--arrow" />
+            </div>
+            {openWorkers && (
+              <div className="add--service--input--forms--full--workers">
+                {dummyData.map((worker) => {
+                  return (
+                    <div
+                      className="add--service--input--forms--full--workers--individual white fs16"
+                      onClick={() => {
+                        handleWorker(worker.name);
+                      }}
+                    >
+                      {worker.name}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
         </div>
         <button
-          className="add--request--button mb8 white"
+          className="add--request--button mb16 white"
           onClick={() => {
             handleAddRequest();
           }}
         >
           Add Request
         </button>
+        <span className="mt8 fs16 fw700 white">Total manpower:</span>
+        <div className="project--name--container mt8 mb24">
+          <div className="universal--input--forms--full mb8">
+            <input
+              type="text"
+              placeholder="e.g. 4"
+              className="create--request--input ml12"
+              onChange={(e) => {
+                setPIC(e.target.value);
+              }}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
