@@ -4,7 +4,11 @@ import material from "./Assets/universal/material.svg";
 import { NavLink, useNavigate } from "react-router-dom";
 
 const HomepageWorker = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+
+  const handleSubmissionsPage = () => {
+    navigate("/submission");
+  };
 
   return (
     <div className="homepage--container">
@@ -36,11 +40,13 @@ const HomepageWorker = () => {
       </div>
       <div className="homepage--submission--container mb24">
         <span className="fs16 fw700 white mb8">Today's submission</span>
-        <NavLink to="/submission">
-          <button className="main--buttons--routing--blue fs16 fw700">
-            Submissions
-          </button>
-        </NavLink>
+
+        <button
+          className="main--buttons--routing--blue fs16 fw700"
+          onClick={handleSubmissionsPage}
+        >
+          Submissions
+        </button>
       </div>
       <div className="homepage--submission--container">
         <span className="fs16 fw700 white mb8">Today's response</span>
