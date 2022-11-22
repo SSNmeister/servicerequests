@@ -67,7 +67,8 @@ const ManpowerRequestForm = ({
           Manpower Request Form.
         </p>
         <span className="fs14 fw400 white">
-          This form must be sent before 4pm for next day works.
+          This form must be sent before <span className="red">4pm</span> for
+          next day works.
         </span>
       </div>
       <div className="create--request--middle--container mb36">

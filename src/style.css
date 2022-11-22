@@ -1,6 +1,7 @@
 /* =============================================Global============================================= */
 
 :root {
+  --red: rgb(255, 0, 0);
   --white: rgb(238, 238, 238);
   --yellow: #f5c32c;
   --orange: rgb(255, 186, 10);
@@ -25,7 +26,7 @@ body {
 }
 
 ::-webkit-input-placeholder {
-  color: var(--white);
+  color: rgba(255, 255, 255, 0.487);
 }
 
 .m0 {
@@ -190,6 +191,10 @@ body {
 
 .blue {
   color: var(--blue);
+}
+
+.red {
+  color: var(--red);
 }
 
 .create--account--font1 {
@@ -402,6 +407,7 @@ body {
   border-radius: 4px;
   border: 1px black solid;
   box-shadow: var(--shadowing);
+  cursor: pointer;
 }
 .add--service--input--forms--full--workers--individual {
   display: flex;
@@ -492,8 +498,6 @@ body {
   text-align: left;
   width: 90%;
 }
-.created--request--workers {
-}
 
 .add--request--button {
   justify-content: center;
@@ -505,6 +509,7 @@ body {
   border-radius: 4px;
   border: 1px black solid;
   box-shadow: var(--shadowing);
+  cursor: pointer;
 }
 
 /* ====================================Home Page ====================================== */
@@ -596,7 +601,14 @@ body {
 .overview--project--text {
   font-weight: 200;
 }
-
+.overview--worker--container {
+  display: flex;
+  flex-direction: column;
+}
+.over--worker--box {
+  display: flex;
+  flex-direction: row;
+}
 .category--cards--container--overview {
   display: flex;
   flex-direction: row;
