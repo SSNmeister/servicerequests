@@ -2,7 +2,7 @@ import React from "react";
 import ReactDom from "react-dom";
 import whitecross from "../Assets/universal/whitecross.svg";
 
-const ConfirmationModal = ({ setConfirmationModal }) => {
+const ConfirmationModal = ({ handleSubmit, setConfirmationModal }) => {
   return (
     <>
       {ReactDom.createPortal(
@@ -12,7 +12,12 @@ const ConfirmationModal = ({ setConfirmationModal }) => {
               <p className="confirmation--modal--box--text">
                 Confirm submission?
               </p>
-              <button className="submit--confirmation--button">Submit</button>
+              <button
+                className="submit--confirmation--button"
+                onClick={() => handleSubmit()}
+              >
+                Submit
+              </button>
             </div>
             <img
               src={whitecross}

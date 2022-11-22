@@ -749,6 +749,11 @@ body {
   color: var(--black);
   font-size: 18px;
   font-weight: 700;
+  cursor: pointer;
+}
+.submit--confirmation--button:hover {
+  scale: 1.01;
+  background-color: gold;
 }
 
 .confirmation--modal--box--text {
