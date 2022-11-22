@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import downArrow from "./Assets/universal/down.svg";
+import dummyData from "./DummyData/dummyData";
 
 const ManpowerRequestForm = () => {
   const [projectName, setProjectName] = useState("");
@@ -10,6 +12,9 @@ const ManpowerRequestForm = () => {
   const [workers, setWorkers] = useState([]);
   const [requestArray, setRequestArray] = useState([]);
 
+  //====================Open & Close of Worker's Names================================
+  const [openWorkers, setOpenWorkers] = useState(false);
+
   const handleAddRequest = () => {
     const array = [
       ...requestArray,
@@ -19,14 +24,20 @@ const ManpowerRequestForm = () => {
     clearInput();
   };
 
-  console.log(requestArray);
+  const handleClickWorkers = () => {
+    setOpenWorkers((current) => !current);
+  };
+
+  const handleWorker = (details) => {
+    const array = [...workers, details];
+    setWorkers(array);
+  };
 
   //--------------------clear input field---------------------
   function clearInput() {
-    var getValue = document.getElementById("valueID");
-    if (getValue.value != "") {
-      getValue.value = "";
-    }
+    setJobItem("");
+    setLocation("");
+    setWorkers("");
   }
 
   return (
@@ -94,7 +105,7 @@ const ManpowerRequestForm = () => {
           return (
             <div className="add--service--input--container mt8 mb24">
               <span className="fs16 fw700 black mb8 fs24 fw700">
-                Request {requestArray.length}
+                Request {details.length}
               </span>
               <span className="fs16 fw700 black mb8 fs12 fw700">Job item:</span>
               <div className="add--service--input--forms--full mb8">
@@ -126,9 +137,8 @@ const ManpowerRequestForm = () => {
             <input
               type="text"
               placeholder="Job item"
-              className="create--request--input"
+              className="create--request--input--request"
               value={jobItem}
-              id="valueID"
               onChange={(e) => {
                 setJobItem(e.target.value);
               }}
@@ -139,9 +149,8 @@ const ManpowerRequestForm = () => {
             <input
               type="text"
               placeholder="Location"
+              className="create--request--input--request"
               value={location}
-              className="create--request--input"
-              id="valueID"
               onChange={(e) => {
                 setLocation(e.target.value);
               }}
@@ -150,26 +159,35 @@ const ManpowerRequestForm = () => {
           <span className="fs16 fw700 black mb8 fs12 fw700">
             Worker's Name:
           </span>
-          <div className="add--service--input--forms--full mb8">
-            <input
-              type="text"
-              placeholder="e.g Safiku"
-              value={workers}
-              className="create--request--input"
-              id="valueID"
-              onChange={(e) => {
-                setWorkers(e.target.value);
-              }}
+          <div className="add--service--input--forms--full">
+            <img
+              src={downArrow}
+              className="down--arrow"
+              onClick={handleClickWorkers}
             />
           </div>
+
+          {openWorkers && (
+            <div className="add--service--input--forms--full--workers">
+              {dummyData.map((worker) => {
+                return (
+                  <div
+                    className="add--service--input--forms--full--workers--individual white fs16"
+                    onClick={() => {
+                      handleWorker(worker.name);
+                    }}
+                  >
+                    {worker.name}
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
         <button
           className="add--request--button mb8 white"
           onClick={() => {
             handleAddRequest();
-            setJobItem(null);
-            setLocation(null);
-            setWorkers(null);
           }}
         >
           Add Request
