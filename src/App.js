@@ -23,8 +23,7 @@ export default function App() {
   return (
     <div>
       <Navbar />
-      {/* <Submission /> */}
-      <Responded />
+      {/* <Responded />  */}
       <Routes>
         <Route path="/" element={<HomepageWorker />} />
         <Route path="/overview" element={<Overview />} />
@@ -50,6 +49,7 @@ export default function App() {
               location={location}
               workers={workers}
               setProjectName={setProjectName}
+              projectName={projectName}
               setDate={setDate}
               setMainContractor={setMainContractor}
               setPIC={setPIC}
@@ -60,6 +60,10 @@ export default function App() {
               setRequestArray={setRequestArray}
             />
           }
+        />
+        <Route
+          path="/submission"
+          element={<Submission requestArray={requestArray} />}
         />
       </Routes>
     </div>
