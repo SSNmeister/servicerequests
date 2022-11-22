@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import backButton from "./Assets/universal/backbutton.svg";
 import HamburgerModal from "./Components/HamburgerModal";
 
@@ -7,6 +8,8 @@ const Navbar = () => {
   //============================NavBar states===================================
   const [isActive, setIsActive] = useState(false); //hamburger animation states
   const [hamburgerModal, setHamburgerModal] = useState(false);
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -18,7 +21,12 @@ const Navbar = () => {
       )}
       <div className="navbar--wrapper">
         <div className="navbar--container">
-          <img src={backButton} className="back--button" alt="images" />
+          <img
+            src={backButton}
+            className="back--button"
+            alt="images"
+            onClick={() => navigate("/")}
+          />
           <p className="navbar--header">Deshin</p>
           <button
             className={
