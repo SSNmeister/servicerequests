@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import downArrow from "./Assets/universal/down.svg";
 import dummyData from "./DummyData/dummyData";
+import cross from "./Assets/universal/cross.svg";
 
 const ManpowerRequestForm = ({
   jobItem,
@@ -36,6 +37,11 @@ const ManpowerRequestForm = ({
     const array = [...workers, details];
     setWorkers(array);
     handleClickWorkers();
+  };
+
+  const handleDelete = (worker) => {
+    const remainingArray = workers.filter((d, i) => d !== worker);
+    setWorkers(remainingArray);
   };
 
   //--------------------clear input field---------------------
@@ -121,16 +127,16 @@ const ManpowerRequestForm = ({
               <span className="fs16 fw700 black mb8 fs12 fw700">Location:</span>
               <div className="add--service--input--forms--full mb8">
                 <div className="created--request--input">
-                  {details.job_Item}
+                  {details.location}
                 </div>
               </div>
               <span className="fs16 fw700 black mb8 fs12 fw700">
                 Worker's Name:
               </span>
-              <div className="add--service--input--forms--full mb8">
-                <div className="created--request--input">
-                  {details.job_Item}
-                </div>
+              <div className="added--workers--input--forms--full mb8">
+                {details.workers.map((item) => {
+                  return <div className="white mb8">{item}</div>;
+                })}
               </div>
             </div>
           );
@@ -167,7 +173,19 @@ const ManpowerRequestForm = ({
           {workers && (
             <div>
               {workers.map((worker) => {
-                return <div className="added--workers--forms">{worker}</div>;
+                return (
+                  <div className="added--workers--forms relative">
+                    {worker}
+                    <img
+                      src={cross}
+                      alt="images"
+                      className="response--cross--button"
+                      onClick={() => {
+                        handleDelete(worker);
+                      }}
+                    />
+                  </div>
+                );
               })}
             </div>
           )}

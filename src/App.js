@@ -19,6 +19,7 @@ export default function App() {
   const [workers, setWorkers] = useState([]);
   const [requestArray, setRequestArray] = useState([]);
 
+  console.log(requestArray);
   return (
     <div>
       <Navbar />
