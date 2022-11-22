@@ -2,16 +2,26 @@ import React from "react";
 import manpower from "./Assets/universal/manpower.svg";
 import material from "./Assets/universal/material.svg";
 import tick from "./Assets/universal/tick.svg";
+import { useNavigate } from "react-router-dom";
 
 const Overview = () => {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate("/response");
+  };
+
   return (
     <div>
       <div className="homepage--container">
         <div className="homepage--header--container mb24">
           <span className="fs32 fw700 white">Overview</span>
         </div>
-        <div className="homepage--submission--container mb24">
-          <span className="fs16 fw700 white mb8">Today's submission</span>
+        <span className="fs16 fw700 white mb8">Today's submission</span>
+        <div
+          className="overview--submission--container mb24"
+          onClick={handleCardClick}
+        >
           <div className="overview--page--submissions--green fs16 fw700">
             <div className="overview--project--box">
               <span className="overview--project--header">Project:</span>

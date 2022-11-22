@@ -243,6 +243,15 @@ const ManpowerRequestForm = ({}) => {
           onClick={() => {
             handleAddRequest();
           }}
+          disabled={
+            projectName === "" ||
+            date === "" ||
+            mainContractor === "" ||
+            pic === "" ||
+            jobItem === "" ||
+            location === "" ||
+            workers.length === 0
+          }
         >
           Add Request
         </button>
