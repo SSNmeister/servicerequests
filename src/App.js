@@ -6,6 +6,8 @@ import ManpowerRequestForm from "./ManpowerRequestForm";
 import HomepageWorker from "./HomepageWorker";
 import Overview from "./Overview";
 import Response from "./Response";
+import Submission from "./Submission";
+import Responded from "./Responded";
 
 export default function App() {
   const [projectName, setProjectName] = useState("");
@@ -19,32 +21,46 @@ export default function App() {
 
   return (
     <div>
-      {/* <Routes> */}
       <Navbar />
-      {/* <Overview /> */}
-      <Response
-        projectName={projectName}
-        setProjectName={setProjectName}
-        date={date}
-        setDate={setDate}
-        workers={workers}
-      />
-      <ManpowerRequestForm
-        jobItem={jobItem}
-        location={location}
-        workers={workers}
-        setProjectName={setProjectName}
-        setDate={setDate}
-        setMainContractor={setMainContractor}
-        setPIC={setPIC}
-        setJobItem={setJobItem}
-        setLocation={setLocation}
-        setWorkers={setWorkers}
-        requestArray={requestArray}
-        setRequestArray={setRequestArray}
-      />
-      <HomepageWorker />
-      {/* </Routes> */}
+      {/* <Submission /> */}
+      <Responded />
+      <Routes>
+        <Route path="/" element={<HomepageWorker />} />
+        <Route path="/overview" element={<Overview />} />
+        <Route
+          path="/response"
+          element={
+            <Response
+              projectName={projectName}
+              setProjectName={setProjectName}
+              date={date}
+              setDate={setDate}
+              workers={workers}
+              mainContractor={mainContractor}
+              pic={pic}
+            />
+          }
+        />
+        <Route
+          path="/manpowerrequestform"
+          element={
+            <ManpowerRequestForm
+              jobItem={jobItem}
+              location={location}
+              workers={workers}
+              setProjectName={setProjectName}
+              setDate={setDate}
+              setMainContractor={setMainContractor}
+              setPIC={setPIC}
+              setJobItem={setJobItem}
+              setLocation={setLocation}
+              setWorkers={setWorkers}
+              requestArray={requestArray}
+              setRequestArray={setRequestArray}
+            />
+          }
+        />
+      </Routes>
     </div>
   );
 }

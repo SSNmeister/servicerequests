@@ -1,8 +1,11 @@
 import React from "react";
 import manpower from "./Assets/universal/manpower.svg";
 import material from "./Assets/universal/material.svg";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const HomepageWorker = () => {
+  // const navigate = useNavigate();
+
   return (
     <div className="homepage--container">
       <div className="homepage--header--container mb24">
@@ -11,14 +14,16 @@ const HomepageWorker = () => {
       <div className="homepage--category--container mb24">
         <span className="fs16 fw700 white mb8">Category</span>
         <div className="category--cards--container">
-          <div className="category--cards--box">
-            <img
-              src={manpower}
-              className="category--cards--icon"
-              alt="images"
-            ></img>
-            <div className="category--cards--text fw700">Manpower</div>
-          </div>
+          <NavLink to="/manpowerrequestform" className="navlinks">
+            <div className="category--cards--box">
+              <img
+                src={manpower}
+                className="category--cards--icon"
+                alt="images"
+              ></img>
+              <div className="category--cards--text fw700">Manpower</div>
+            </div>
+          </NavLink>
           <div className="category--cards--box ml12">
             <img
               src={material}
@@ -31,9 +36,11 @@ const HomepageWorker = () => {
       </div>
       <div className="homepage--submission--container mb24">
         <span className="fs16 fw700 white mb8">Today's submission</span>
-        <button className="main--buttons--routing--blue fs16 fw700">
-          Submissions
-        </button>
+        <NavLink to="/submission">
+          <button className="main--buttons--routing--blue fs16 fw700">
+            Submissions
+          </button>
+        </NavLink>
       </div>
       <div className="homepage--submission--container">
         <span className="fs16 fw700 white mb8">Today's response</span>
