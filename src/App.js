@@ -17,9 +17,10 @@ export default function App() {
   const [jobItem, setJobItem] = useState("");
   const [location, setLocation] = useState("");
   const [workers, setWorkers] = useState([]);
-  const [requestArray, setRequestArray] = useState([]);
+  const [time, setTime] = useState("");
+  const [pax, setPax] = useState("");
+  const [transport, setTransport] = useState("");
 
-  console.log(requestArray);
   return (
     <div>
       <Navbar />
@@ -50,21 +51,22 @@ export default function App() {
               workers={workers}
               setProjectName={setProjectName}
               projectName={projectName}
+              date={date}
               setDate={setDate}
+              mainContractor={mainContractor}
               setMainContractor={setMainContractor}
+              pic={pic}
               setPIC={setPIC}
               setJobItem={setJobItem}
               setLocation={setLocation}
               setWorkers={setWorkers}
-              requestArray={requestArray}
-              setRequestArray={setRequestArray}
+              time={time}
+              pax={pax}
+              transport={transport}
             />
           }
         />
-        <Route
-          path="/submission"
-          element={<Submission requestArray={requestArray} />}
-        />
+        <Route path="/submission" element={<Submission />} />
       </Routes>
     </div>
   );

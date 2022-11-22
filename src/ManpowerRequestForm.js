@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import downArrow from "./Assets/universal/down.svg";
 import dummyData from "./DummyData/dummyData";
 import cross from "./Assets/universal/cross.svg";
@@ -10,32 +10,74 @@ const ManpowerRequestForm = ({
   workers,
   setProjectName,
   projectName,
+  date,
   setDate,
+  mainContractor,
   setMainContractor,
+  pic,
   setPIC,
   setJobItem,
   setLocation,
   setWorkers,
-  requestArray,
-  setRequestArray,
+  time,
+  pax,
+  transport,
 }) => {
   const navigate = useNavigate();
   //====================Open & Close of Worker's Names================================
   const [openWorkers, setOpenWorkers] = useState(false);
 
+  //===============================FETCH APIs================================
+  const [workersData, setWorkersData] = useState([]);
+
+  const getWorkers = async () => {
+    try {
+      const res = await fetch(`http://127.0.0.1:8002/workers/`, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        method: "GET",
+      });
+      const data = await res.json();
+      setWorkersData(data);
+      console.log(data);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const createService = async () => {
+    try {
+      const res = await fetch("http://127.0.0.1:8002/servicerequests/", {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify({
+          project: projectName,
+          date: date,
+          main_contractor: mainContractor,
+          pic: pic,
+          job_item: jobItem,
+          location: location,
+          workers: workers,
+          time: time,
+          pax: pax,
+          transport: transport,
+        }),
+      });
+      navigate("/");
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  //======================================================================
+
   const handleAddRequest = () => {
-    const array = [
-      ...requestArray,
-      {
-        project: projectName,
-        job_Item: jobItem,
-        location: location,
-        workers: workers,
-      },
-    ];
-    setRequestArray(array);
     clearInput();
-    navigate("/");
+    createService();
   };
 
   const handleClickWorkers = () => {
@@ -59,6 +101,12 @@ const ManpowerRequestForm = ({
     setLocation("");
     setWorkers("");
   }
+
+  //===============================Use Effect================================
+
+  useEffect(() => {
+    getWorkers();
+  }, []);
 
   return (
     <div className="create--request--container">
@@ -122,35 +170,7 @@ const ManpowerRequestForm = ({
           </div>
         </div>
         <span className="fs16 fw700 white">Request:</span>
-        {/* {requestArray.map((details) => {
-          return (
-            <div className="add--service--input--container mt8 mb24">
-              <span className="fs16 fw700 black mb8 fs24 fw700">
-                Request {details.length}
-              </span>
-              <span className="fs16 fw700 black mb8 fs12 fw700">Job item:</span>
-              <div className="add--service--input--forms--full mb8">
-                <div className="created--request--input">
-                  {details.job_Item}
-                </div>
-              </div>
-              <span className="fs16 fw700 black mb8 fs12 fw700">Location:</span>
-              <div className="add--service--input--forms--full mb8">
-                <div className="created--request--input">
-                  {details.location}
-                </div>
-              </div>
-              <span className="fs16 fw700 black mb8 fs12 fw700">
-                Worker's Name:
-              </span>
-              <div className="added--workers--input--forms--full mb8">
-                {details.workers.map((item) => {
-                  return <div className="white mb8">{item}</div>;
-                })}
-              </div>
-            </div>
-          );
-        })} */}
+
         <div className="add--service--input--container mt8 mb24">
           <span className="fs16 fw700 black mb8 fs24 fw700">Add Request</span>
           <span className="fs16 fw700 black mb8 fs12 fw700">Job item:</span>
@@ -209,7 +229,7 @@ const ManpowerRequestForm = ({
             </div>
             {openWorkers && (
               <div className="add--service--input--forms--full--workers">
-                {dummyData.map((worker) => {
+                {workersData.map((worker) => {
                   return (
                     <div
                       className="add--service--input--forms--full--workers--individual white fs16"
