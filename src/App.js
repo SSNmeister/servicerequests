@@ -12,6 +12,7 @@ import Responded from "./Responded";
 export default function App() {
   const [individualServiceRequests, setIndividualServiceRequests] =
     useState("");
+  console.log(individualServiceRequests);
   return (
     <div>
       <Navbar />
