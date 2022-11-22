@@ -1,15 +1,57 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import manpower from "./Assets/universal/manpower.svg";
 import material from "./Assets/universal/material.svg";
-import tick from "./Assets/universal/tick.svg";
 import { useNavigate } from "react-router-dom";
+import OverviewCard from "./OverviewCard";
 
-const Overview = () => {
+const Overview = ({ setIndividualServiceRequests }) => {
   const navigate = useNavigate();
+  const [allServiceRequests, setAllServiceRequests] = useState("");
 
-  const handleCardClick = () => {
-    navigate("/response");
+  //============================== Backend API ============================
+  const fetchAllServiceRequests = async () => {
+    try {
+      const res = await fetch(`http://127.0.0.1:8002/servicerequests/`, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        method: "GET",
+      });
+      const data = await res.json();
+      setAllServiceRequests(data);
+    } catch (e) {
+      console.error(e);
+    }
   };
+
+  const fetchServiceRequestById = async (id) => {
+    try {
+      const res = await fetch(`http://127.0.0.1:8002/servicerequests/${id}`, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        method: "GET",
+      });
+      const data = await res.json();
+      setIndividualServiceRequests(data);
+      navigate("/response");
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  //========================================================================
+
+  const handleCardClick = (id) => {
+    fetchServiceRequestById(id);
+  };
+
+  //========================= use effect ===========================
+  useEffect(() => {
+    fetchAllServiceRequests();
+  }, []);
 
   return (
     <div>
@@ -18,38 +60,13 @@ const Overview = () => {
           <span className="fs32 fw700 white">Overview</span>
         </div>
         <span className="fs16 fw700 white mb8">Today's submission</span>
-        <div
-          className="overview--submission--container mb24"
-          onClick={handleCardClick}
-        >
-          <div className="overview--page--submissions--green fs16 fw700">
-            <div className="overview--project--box">
-              <span className="overview--project--header">Project:</span>
-              <span className="overview--project--text">T2E</span>
-            </div>
+        {allServiceRequests &&
+          allServiceRequests.map((item) => {
+            return (
+              <OverviewCard item={item} handleCardClick={handleCardClick} />
+            );
+          })}
 
-            <div className="overview--project--box">
-              <span className="overview--project--header">Job Item:</span>
-              <span className="overview--project--text">
-                Terminal 2 Installation
-              </span>
-            </div>
-
-            <div className="overview--project--box">
-              <span className="overview--project--header">Location:</span>
-              <span className="overview--project--text">
-                Changi Airport T2, B2
-              </span>
-            </div>
-            <div className="overview--project--box">
-              <span className="overview--project--header">Workers:</span>
-              <div>
-                <img src={tick} alt="images"></img>
-                <span className="overview--project--text ml12">Example</span>
-              </div>
-            </div>
-          </div>
-        </div>
         <div className="homepage--submission--container mb24">
           <span className="fs16 fw700 white mb8">Today's submission</span>
           <div className="category--cards--container--overview">

@@ -10,14 +10,28 @@ import Submission from "./Submission";
 import Responded from "./Responded";
 
 export default function App() {
+  const [individualServiceRequests, setIndividualServiceRequests] =
+    useState("");
   return (
     <div>
       <Navbar />
       {/* <Responded />  */}
       <Routes>
         <Route path="/" element={<HomepageWorker />} />
-        <Route path="/overview" element={<Overview />} />
-        <Route path="/response" element={<Response />} />
+        <Route
+          path="/overview"
+          element={
+            <Overview
+              setIndividualServiceRequests={setIndividualServiceRequests}
+            />
+          }
+        />
+        <Route
+          path="/response"
+          element={
+            <Response individualServiceRequests={individualServiceRequests} />
+          }
+        />
         <Route path="/manpowerrequestform" element={<ManpowerRequestForm />} />
         <Route path="/submission" element={<Submission />} />
       </Routes>
