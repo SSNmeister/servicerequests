@@ -610,3 +610,71 @@ body {
   border: 1px black solid;
   box-shadow: var(--shadowing);
 }
+
+.universal--response--forms--full {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 370px;
+  height: 56px;
+  background-color: var(--blue);
+  border-radius: 4px;
+  border: 1px black solid;
+  box-shadow: var(--shadowing);
+}
+.response--cross--button {
+  position: absolute;
+  right: 10px;
+}
+
+.response--request--worker {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  color: var(--white);
+  width: 90%;
+  font-family: "Exo", sans-serif;
+  font-size: 14px;
+}
+
+.submit--response--button {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 700;
+  width: 370px;
+  height: 56px;
+  background-color: var(--green);
+  border-radius: 4px;
+  border: 1px black solid;
+  box-shadow: var(--shadowing);
+  cursor: pointer;
+}
+
+/* ====================================Confirmation Modal====================================== */
+.modal--confirmation--overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0%;
+  background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+}
+
+.confirmation--modal--container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirmation--modal--box {
+  height: 200px;
+  width: 300px;
+  background-color: var(--green);
+}

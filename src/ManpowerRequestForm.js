@@ -2,16 +2,20 @@ import React, { useState } from "react";
 import downArrow from "./Assets/universal/down.svg";
 import dummyData from "./DummyData/dummyData";
 
-const ManpowerRequestForm = () => {
-  const [projectName, setProjectName] = useState("");
-  const [date, setDate] = useState("");
-  const [mainContractor, setMainContractor] = useState("");
-  const [pic, setPIC] = useState("");
-  const [jobItem, setJobItem] = useState("");
-  const [location, setLocation] = useState("");
-  const [workers, setWorkers] = useState([]);
-  const [requestArray, setRequestArray] = useState([]);
-
+const ManpowerRequestForm = ({
+  jobItem,
+  location,
+  workers,
+  setProjectName,
+  setDate,
+  setMainContractor,
+  setPIC,
+  setJobItem,
+  setLocation,
+  setWorkers,
+  requestArray,
+  setRequestArray,
+}) => {
   //====================Open & Close of Worker's Names================================
   const [openWorkers, setOpenWorkers] = useState(false);
 
