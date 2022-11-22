@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import downArrow from "./Assets/universal/down.svg";
 import dummyData from "./DummyData/dummyData";
 import cross from "./Assets/universal/cross.svg";
+import { useNavigate } from "react-router-dom";
 
 const ManpowerRequestForm = ({
   jobItem,
   location,
   workers,
   setProjectName,
+  projectName,
   setDate,
   setMainContractor,
   setPIC,
@@ -17,16 +19,23 @@ const ManpowerRequestForm = ({
   requestArray,
   setRequestArray,
 }) => {
+  const navigate = useNavigate();
   //====================Open & Close of Worker's Names================================
   const [openWorkers, setOpenWorkers] = useState(false);
 
   const handleAddRequest = () => {
     const array = [
       ...requestArray,
-      { job_Item: jobItem, location: location, workers: workers },
+      {
+        project: projectName,
+        job_Item: jobItem,
+        location: location,
+        workers: workers,
+      },
     ];
     setRequestArray(array);
     clearInput();
+    navigate("/");
   };
 
   const handleClickWorkers = () => {
@@ -112,7 +121,7 @@ const ManpowerRequestForm = ({
           </div>
         </div>
         <span className="fs16 fw700 white">Request:</span>
-        {requestArray.map((details) => {
+        {/* {requestArray.map((details) => {
           return (
             <div className="add--service--input--container mt8 mb24">
               <span className="fs16 fw700 black mb8 fs24 fw700">
@@ -140,7 +149,7 @@ const ManpowerRequestForm = ({
               </div>
             </div>
           );
-        })}
+        })} */}
         <div className="add--service--input--container mt8 mb24">
           <span className="fs16 fw700 black mb8 fs24 fw700">Add Request</span>
           <span className="fs16 fw700 black mb8 fs12 fw700">Job item:</span>
@@ -223,19 +232,6 @@ const ManpowerRequestForm = ({
         >
           Add Request
         </button>
-        <span className="mt8 fs16 fw700 white">Total manpower:</span>
-        <div className="project--name--container mt8 mb24">
-          <div className="universal--input--forms--full mb8">
-            <input
-              type="text"
-              placeholder="e.g. 4"
-              className="create--request--input ml12"
-              onChange={(e) => {
-                setPIC(e.target.value);
-              }}
-            />
-          </div>
-        </div>
       </div>
     </div>
   );
