@@ -604,11 +604,27 @@ body {
   width: 350px;
 }
 
+.overview--project--row--box {
+  display: flex;
+  width: 100%;
+}
 .overview--project--box {
   display: flex;
   flex-direction: column;
   margin: 10px 0px;
   margin-left: 10px;
+}
+
+.overview--project--box--unique1 {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  width: 200px;
+}
+.overview--project--box--unique2 {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
 }
 
 .overview--project--header {
@@ -762,4 +778,9 @@ body {
   top: 15px;
   right: 15px;
   cursor: pointer;
+}
+
+.responded--workers--names {
+  margin-bottom: 10px;
+  font-weight: 500;
 }

@@ -262,14 +262,6 @@ const ManpowerRequestForm = ({}) => {
               )}
             </div>
           </div>
-          <button
-            className="add--request--button mb16 white"
-            onClick={() => {
-              handleAddRequest();
-            }}
-          >
-            Add Request
-          </button>
         </div>
         <button
           className="add--request--button mb16 white"

@@ -20,6 +20,7 @@ export default function App() {
         <Route path="/response" element={<Response />} />
         <Route path="/manpowerrequestform" element={<ManpowerRequestForm />} />
         <Route path="/submission" element={<Submission />} />
+        <Route path="/responded" element={<Responded />} />
       </Routes>
     </div>
   );

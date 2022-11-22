@@ -10,6 +10,10 @@ const HomepageWorker = () => {
     navigate("/submission");
   };
 
+  const handleRespondedPage = () => {
+    navigate("/responded");
+  };
+
   return (
     <div className="homepage--container">
       <div className="homepage--header--container mb24">
@@ -50,7 +54,10 @@ const HomepageWorker = () => {
       </div>
       <div className="homepage--submission--container">
         <span className="fs16 fw700 white mb8">Today's response</span>
-        <button className="main--buttons--routing--green fs16 fw700">
+        <button
+          className="main--buttons--routing--green fs16 fw700"
+          onClick={handleRespondedPage}
+        >
           Response
         </button>
       </div>

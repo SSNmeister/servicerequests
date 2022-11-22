@@ -1,43 +1,46 @@
-import React from "react";
-import tick from "./Assets/universal/tick.svg";
+import React, { useEffect, useState } from "react";
+
+import RespondedCard from "./RespondedCard";
 
 const Responded = () => {
+  const [respondedServices, setRespondedServices] = useState("");
+
+  const getRespondedServices = async () => {
+    try {
+      const res = await fetch(
+        `http://127.0.0.1:8002/servicerequests/responded`,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          method: "GET",
+        }
+      );
+      const data = await res.json();
+      setRespondedServices(data);
+      console.log(data);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  useEffect(() => {
+    getRespondedServices();
+  }, []);
+
+  console.log(respondedServices);
   return (
     <div>
       <div className="homepage--container">
         <div className="homepage--header--container mb24">
-          <span className="fs32 fw700 white">Submission</span>
+          <span className="fs32 fw700 white">Responded</span>
         </div>
-        <div className="homepage--submission--container mb24">
-          <span className="fs16 fw700 white mb8">Today's submission</span>
-          <div className="overview--page--submissions--green fs16 fw700">
-            <div className="overview--project--box">
-              <span className="overview--project--header">Project:</span>
-              <span className="overview--project--text">T2E</span>
-            </div>
+        {respondedServices &&
+          respondedServices.map((services) => {
+            return <RespondedCard services={services} />;
+          })}
 
-            <div className="overview--project--box">
-              <span className="overview--project--header">Job Item:</span>
-              <span className="overview--project--text">
-                Terminal 2 Installation
-              </span>
-            </div>
-
-            <div className="overview--project--box">
-              <span className="overview--project--header">Location:</span>
-              <span className="overview--project--text">
-                Changi Airport T2, B2
-              </span>
-            </div>
-            <div className="overview--project--box">
-              <span className="overview--project--header">Workers:</span>
-              <div>
-                <img src={tick} alt="images"></img>
-                <span className="overview--project--text ml12">Example</span>
-              </div>
-            </div>
-          </div>
-        </div>
         <div className="homepage--submission--container mb24"></div>
       </div>
     </div>
