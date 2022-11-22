@@ -10,17 +10,6 @@ import Submission from "./Submission";
 import Responded from "./Responded";
 
 export default function App() {
-  const [projectName, setProjectName] = useState("");
-  const [date, setDate] = useState("");
-  const [mainContractor, setMainContractor] = useState("");
-  const [pic, setPIC] = useState("");
-  const [jobItem, setJobItem] = useState("");
-  const [location, setLocation] = useState("");
-  const [workers, setWorkers] = useState([]);
-  const [time, setTime] = useState("");
-  const [pax, setPax] = useState("");
-  const [transport, setTransport] = useState("");
-
   return (
     <div>
       <Navbar />
@@ -28,44 +17,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomepageWorker />} />
         <Route path="/overview" element={<Overview />} />
-        <Route
-          path="/response"
-          element={
-            <Response
-              projectName={projectName}
-              setProjectName={setProjectName}
-              date={date}
-              setDate={setDate}
-              workers={workers}
-              mainContractor={mainContractor}
-              pic={pic}
-            />
-          }
-        />
-        <Route
-          path="/manpowerrequestform"
-          element={
-            <ManpowerRequestForm
-              jobItem={jobItem}
-              location={location}
-              workers={workers}
-              setProjectName={setProjectName}
-              projectName={projectName}
-              date={date}
-              setDate={setDate}
-              mainContractor={mainContractor}
-              setMainContractor={setMainContractor}
-              pic={pic}
-              setPIC={setPIC}
-              setJobItem={setJobItem}
-              setLocation={setLocation}
-              setWorkers={setWorkers}
-              time={time}
-              pax={pax}
-              transport={transport}
-            />
-          }
-        />
+        <Route path="/response" element={<Response />} />
+        <Route path="/manpowerrequestform" element={<ManpowerRequestForm />} />
         <Route path="/submission" element={<Submission />} />
       </Routes>
     </div>

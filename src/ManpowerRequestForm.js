@@ -4,25 +4,18 @@ import dummyData from "./DummyData/dummyData";
 import cross from "./Assets/universal/cross.svg";
 import { useNavigate } from "react-router-dom";
 
-const ManpowerRequestForm = ({
-  jobItem,
-  location,
-  workers,
-  setProjectName,
-  projectName,
-  date,
-  setDate,
-  mainContractor,
-  setMainContractor,
-  pic,
-  setPIC,
-  setJobItem,
-  setLocation,
-  setWorkers,
-  time,
-  pax,
-  transport,
-}) => {
+const ManpowerRequestForm = ({}) => {
+  const [projectName, setProjectName] = useState("");
+  const [date, setDate] = useState("");
+  const [mainContractor, setMainContractor] = useState("");
+  const [pic, setPIC] = useState("");
+  const [jobItem, setJobItem] = useState("");
+  const [location, setLocation] = useState("");
+  const [workers, setWorkers] = useState([]);
+  const [time, setTime] = useState("");
+  const [pax, setPax] = useState("");
+  const [transport, setTransport] = useState("");
+
   const navigate = useNavigate();
   //====================Open & Close of Worker's Names================================
   const [openWorkers, setOpenWorkers] = useState(false);
