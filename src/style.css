@@ -511,6 +511,13 @@ body {
   box-shadow: var(--shadowing);
   cursor: pointer;
 }
+.add--request--button:hover {
+  background-color: #0040ff;
+}
+.add--request--button:disabled {
+  background-color: var(--red);
+  color: black;
+}
 
 /* ====================================Home Page ====================================== */
 .homepage--container {
@@ -554,6 +561,16 @@ body {
   flex-direction: column;
   width: 370px;
 }
+.overview--submission--container {
+  display: flex;
+  flex-direction: column;
+  width: 370px;
+  cursor: pointer;
+}
+.overview--submission--container:hover {
+  scale: 1.01;
+}
+
 .main--buttons--routing--blue {
   color: black;
   background-color: var(--blue);

@@ -271,6 +271,23 @@ const ManpowerRequestForm = ({}) => {
             Add Request
           </button>
         </div>
+        <button
+          className="add--request--button mb16 white"
+          onClick={() => {
+            handleAddRequest();
+          }}
+          disabled={
+            projectName === "" ||
+            date === "" ||
+            mainContractor === "" ||
+            pic === "" ||
+            jobItem === "" ||
+            location === "" ||
+            workers.length === 0
+          }
+        >
+          Add Request
+        </button>
       </div>
     </>
   );
