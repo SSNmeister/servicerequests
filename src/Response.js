@@ -21,9 +21,11 @@ const Response = ({ projectName, date, setProjectName, setDate, workers }) => {
   return (
     <div>
       <div className="response--container">
-        {confirmationModal && <ConfirmationModal />}
+        {confirmationModal && (
+          <ConfirmationModal setConfirmationModal={setConfirmationModal} />
+        )}
         <div className="homepage--header--container mb24">
-          <span className="fs32 fw700 white">Overview</span>
+          <span className="fs32 fw700 white">Response</span>
         </div>
         <div className="create--request--middle--container mb36">
           <span className="fs16 fw700 white">Project:</span>
