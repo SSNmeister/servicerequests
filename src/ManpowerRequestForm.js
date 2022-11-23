@@ -4,6 +4,7 @@ import dummyData from "./DummyData/dummyData";
 import cross from "./Assets/universal/cross.svg";
 import { useNavigate } from "react-router-dom";
 import ConfirmationModalWorker from "./Components/ConfirmationModalWorker";
+import ManpowerJobRequests from "./Components/ManpowerJobRequests";
 
 const ManpowerRequestForm = ({}) => {
   const [projectName, setProjectName] = useState("");
@@ -16,14 +17,13 @@ const ManpowerRequestForm = ({}) => {
   const [time, setTime] = useState("");
   const [pax, setPax] = useState("");
   const [transport, setTransport] = useState("");
+  const [jobsArray, setJobsArray] = useState([]);
 
   const navigate = useNavigate();
   //====================Open & Close of Worker's Names================================
   const [openWorkers, setOpenWorkers] = useState(false);
-
   //====================Open & Close of Confirmation Modal================================
   const [confirmationModalWorker, setConfirmationModalWorker] = useState(false);
-
   //===============================FETCH APIs================================
   const [workersData, setWorkersData] = useState([]);
 
@@ -45,18 +45,6 @@ const ManpowerRequestForm = ({}) => {
   };
 
   const createService = async () => {
-    console.log(
-      projectName,
-      date,
-      mainContractor,
-      pic,
-      jobItem,
-      location,
-      workers,
-      time,
-      pax,
-      transport
-    );
     try {
       const res = await fetch("http://127.0.0.1:8002/servicerequests/", {
         headers: {
@@ -69,12 +57,13 @@ const ManpowerRequestForm = ({}) => {
           date: date,
           main_contractor: mainContractor,
           pic: pic,
-          job_item: jobItem,
-          location: location,
-          workers: workers,
+          // job_item: jobItem,
+          // location: location,
+          // workers: workers,
           time: time,
           pax: pax,
           transport: transport,
+          jobs: jobsArray,
         }),
       });
       setConfirmationModalWorker(false);
@@ -105,6 +94,17 @@ const ManpowerRequestForm = ({}) => {
     setWorkers(remainingArray);
   };
 
+  const handleAddJobRequestIntoArray = (details) => {
+    const array = [...jobsArray, details];
+    setJobsArray(array);
+  };
+
+  const handleDeleteJobRequestsFromArray = (index) => {
+    const remainingArray = jobsArray.splice(index, 1);
+    setJobItem(remainingArray);
+  };
+
+  console.log(jobsArray);
   //--------------------clear input field---------------------
   function clearInput() {
     setJobItem("");
@@ -136,7 +136,7 @@ const ManpowerRequestForm = ({}) => {
             next day works.
           </span>
         </div>
-        <div className="create--request--middle--container mb36">
+        <div className="create--request--middle--container">
           <span className="fs16 fw700 white">Project:</span>
           <div className="project--name--container mt8 mb24">
             <div className="universal--input--forms--full">
@@ -187,8 +187,19 @@ const ManpowerRequestForm = ({}) => {
             </div>
           </div>
           <span className="fs16 fw700 white">Request:</span>
+          {jobsArray.map((item, index) => {
+            return (
+              <ManpowerJobRequests
+                item={item}
+                index={index}
+                handleDeleteJobRequestsFromArray={
+                  handleDeleteJobRequestsFromArray
+                }
+              />
+            );
+          })}
 
-          <div className="add--service--input--container mt8 mb24">
+          <div className="add--service--input--container mt8 mb8">
             <span className="fs16 fw700 black mb8 fs24 fw700">Add Request</span>
             <span className="fs16 fw700 black mb8 fs12 fw700">Job item:</span>
             <div className="add--service--input--forms--full mb8">
@@ -264,21 +275,26 @@ const ManpowerRequestForm = ({}) => {
           </div>
         </div>
         <button
+          className="add--request--button mb16"
+          onClick={() =>
+            handleAddJobRequestIntoArray({
+              jobItem: jobItem,
+              location: location,
+              workers: workers,
+            })
+          }
+          disabled={jobItem === "" || location === "" || workers.length === 0}
+        >
+          Add Request
+        </button>
+        <button
           className="add--request--button mb16 white"
           onClick={() => {
             handleAddRequest();
           }}
-          disabled={
-            projectName === "" ||
-            date === "" ||
-            mainContractor === "" ||
-            pic === "" ||
-            jobItem === "" ||
-            location === "" ||
-            workers.length === 0
-          }
+          disabled={jobsArray.length === 0}
         >
-          Add Request
+          Submit
         </button>
       </div>
     </>

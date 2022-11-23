@@ -46,36 +46,43 @@ const Submission = () => {
                         {item.project}
                       </span>
                     </div>
-
                     <div className="overview--project--box">
-                      <span className="overview--project--header">
-                        Job Item:
-                      </span>
-                      <span className="overview--project--text">
-                        {item.job_item}
-                      </span>
-                    </div>
-
-                    <div className="overview--project--box">
-                      <span className="overview--project--header">
-                        Location:
-                      </span>
-                      <span className="overview--project--text">
-                        {item.location}
-                      </span>
-                    </div>
-                    <div className="overview--project--box">
-                      <span className="overview--project--header">
-                        Workers:
-                      </span>
                       <div className="overview--worker--container">
-                        {item.workers.map((worker) => {
+                        {item.jobs.map((item, i) => {
+                          let x = JSON.parse(item);
                           return (
                             <div className="over--worker--box mb8">
-                              <img src={tick} alt="images"></img>
-                              <span className="overview--project--text ml12">
-                                {worker}
+                              <span className="overview--project--header fw700">
+                                Jobs {i + 1}
                               </span>
+                              <div className="jobs--box">
+                                <div className="individual--jobs--box">
+                                  <img src={tick} alt="images"></img>
+                                  <span className="ml8">Job item:</span>
+                                  <span className="overview--project--text ml12">
+                                    {x.jobItem}
+                                  </span>
+                                </div>
+                                <div className="individual--jobs--box mt8">
+                                  <img src={tick} alt="images"></img>
+                                  <span className="ml8">Location:</span>
+                                  <span className="overview--project--text ml12">
+                                    {x.location}
+                                  </span>
+                                </div>
+                                <div className="individual--jobs--box">
+                                  <img src={tick} alt="images"></img>
+                                  <div className="individual--workers--box ml12">
+                                    {x.workers.map((workers) => {
+                                      return (
+                                        <span className="fs16 fw300">
+                                          {workers}
+                                        </span>
+                                      );
+                                    })}
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                           );
                         })}

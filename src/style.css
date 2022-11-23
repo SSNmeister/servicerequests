@@ -380,8 +380,7 @@ body {
   border: 1px black solid;
   box-shadow: var(--shadowing);
 }
-
-.add--service--input--container {
+.added--request--container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -390,6 +389,17 @@ body {
   border: 1px black solid;
   box-shadow: var(--shadowing);
   background-color: var(--green);
+  padding: 10px;
+}
+.add--service--input--container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 350px;
+  border-radius: 4px;
+  border: 1px black solid;
+  box-shadow: var(--shadowing);
+  background-color: white;
   padding: 10px;
 }
 .add--service--input--forms--full--container {
@@ -640,14 +650,26 @@ body {
 }
 .over--worker--box {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 .category--cards--container--overview {
   display: flex;
   flex-direction: row;
   width: 370px;
 }
-
+.jobs--box {
+  display: flex;
+  flex-direction: column;
+}
+.individual--jobs--box {
+  display: flex;
+  flex-direction: row;
+}
+.individual--workers--box {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+}
 /* ====================================Response Page ====================================== */
 .response--container {
   display: flex;
@@ -693,6 +715,11 @@ body {
 .response--cross--button {
   position: absolute;
   right: 10px;
+}
+.job--card--cross--button {
+  position: absolute;
+  right: 10px;
+  top: 16px;
 }
 
 .response--request--worker {

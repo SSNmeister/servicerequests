@@ -53,6 +53,8 @@ const Overview = ({ setIndividualServiceRequests }) => {
     fetchAllServiceRequests();
   }, []);
 
+  console.log(allServiceRequests);
+
   return (
     <div>
       <div className="homepage--container">
@@ -61,9 +63,13 @@ const Overview = ({ setIndividualServiceRequests }) => {
         </div>
         <span className="fs16 fw700 white mb8">Today's submission</span>
         {allServiceRequests &&
-          allServiceRequests.map((item) => {
+          allServiceRequests.map((item, i) => {
             return (
-              <OverviewCard item={item} handleCardClick={handleCardClick} />
+              <OverviewCard
+                item={item}
+                handleCardClick={handleCardClick}
+                i={i}
+              />
             );
           })}
 
