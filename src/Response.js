@@ -66,6 +66,7 @@ const Response = ({ individualServiceRequests }) => {
           time: pickUpTime,
           pax: pax,
           transport: transport,
+          response: "yes",
         }),
       });
       navigate("/overview");
