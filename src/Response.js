@@ -8,9 +8,7 @@ import { useNavigate } from "react-router-dom";
 const Response = ({ individualServiceRequests }) => {
   const navigate = useNavigate();
 
-  const [newWorkerArray, setNewWorkerArray] = useState(
-    individualServiceRequests[0].workers
-  );
+  const [newWorkerArray, setNewWorkerArray] = useState([]);
   const [projectName, setProjectName] = useState(
     individualServiceRequests[0].project
   );
@@ -21,7 +19,22 @@ const Response = ({ individualServiceRequests }) => {
   const [pickUpTime, setPickUpTime] = useState("");
   const [pax, setPax] = useState("");
   const [transport, setTransport] = useState("");
-  console.log(individualServiceRequests[0]);
+  console.log(individualServiceRequests);
+
+  const [jobsArray, setJobsArray] = useState([]);
+
+  const pushJobCards = (details) => {
+    console.log(details);
+    jobsArray.push(details);
+  };
+
+  const getJobCards = () => {
+    for (let i = 0; i < individualServiceRequests[0].jobs.length; i++) {
+      pushJobCards(JSON.parse(individualServiceRequests[0].jobs[i]));
+    }
+  };
+  //   console.log(individualServiceRequests[0].jobs.length);
+  console.log(jobsArray);
 
   //====================Open & Close of Worker's Names================================
   const [openWorkers, setOpenWorkers] = useState(false);
@@ -62,7 +75,7 @@ const Response = ({ individualServiceRequests }) => {
           pic: individualServiceRequests[0].pic,
           job_item: individualServiceRequests[0].job_item,
           location: individualServiceRequests[0].location,
-          workers: newWorkerArray,
+          //   workers: newWorkerArray,
           time: pickUpTime,
           pax: pax,
           transport: transport,
@@ -102,10 +115,14 @@ const Response = ({ individualServiceRequests }) => {
   //===============================Use Effect================================
   useEffect(() => {
     getWorkers();
+    getJobCards();
   }, []);
 
   return (
     <div>
+      {/* {jobsArray.map((item) => {
+        return <div>{JSON.parse(item)}</div>;
+      })} */}
       <div className="response--container">
         {confirmationModal && (
           <ConfirmationModal
