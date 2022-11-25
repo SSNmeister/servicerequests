@@ -1,27 +1,21 @@
 import React, { useState, useEffect } from "react";
-import dummyData from "./DummyData/dummyData";
-import cross from "./Assets/universal/cross.svg";
-import downArrow from "./Assets/universal/down.svg";
 import ConfirmationModal from "./Components/ConfirmationModal";
 import { useNavigate } from "react-router-dom";
+import ResponseJobCards from "./Components/ResponseJobCards";
 
 const Response = ({ individualServiceRequests }) => {
   const navigate = useNavigate();
 
-  const [newWorkerArray, setNewWorkerArray] = useState([]);
+  // const [newWorkerArray, setNewWorkerArray] = useState([]);
   const [projectName, setProjectName] = useState(
     individualServiceRequests[0].project
   );
   const [date, setDate] = useState(individualServiceRequests[0].date);
-  const [location, setLocation] = useState(
-    individualServiceRequests[0].location
-  );
-  const [pickUpTime, setPickUpTime] = useState("");
-  const [pax, setPax] = useState("");
-  const [transport, setTransport] = useState("");
-  console.log(individualServiceRequests);
-
   const [jobsArray, setJobsArray] = useState([]);
+  const [finalisedJobsArray, setFinalisedJobsArray] = useState([]);
+  console.log(individualServiceRequests);
+  console.log(jobsArray);
+  console.log(finalisedJobsArray);
 
   const pushJobCards = (details) => {
     console.log(details);
@@ -33,11 +27,6 @@ const Response = ({ individualServiceRequests }) => {
       pushJobCards(JSON.parse(individualServiceRequests[0].jobs[i]));
     }
   };
-  //   console.log(individualServiceRequests[0].jobs.length);
-  console.log(jobsArray);
-
-  //====================Open & Close of Worker's Names================================
-  const [openWorkers, setOpenWorkers] = useState(false);
 
   //===============================FETCH APIs================================
   const [workersData, setWorkersData] = useState([]);
@@ -53,7 +42,6 @@ const Response = ({ individualServiceRequests }) => {
       });
       const data = await res.json();
       setWorkersData(data);
-      console.log(data);
     } catch (e) {
       console.error(e);
     }
@@ -73,13 +61,8 @@ const Response = ({ individualServiceRequests }) => {
           date: date,
           main_contractor: individualServiceRequests[0].main_contractor,
           pic: individualServiceRequests[0].pic,
-          job_item: individualServiceRequests[0].job_item,
-          location: individualServiceRequests[0].location,
-          //   workers: newWorkerArray,
-          time: pickUpTime,
-          pax: pax,
-          transport: transport,
           response: "yes",
+          jobs: finalisedJobsArray,
         }),
       });
       navigate("/overview");
@@ -90,22 +73,6 @@ const Response = ({ individualServiceRequests }) => {
 
   //=======================================Confirmation Modal=======================================
   const [confirmationModal, setConfirmationModal] = useState(false);
-
-  const handleDelete = (worker) => {
-    const remainingArray = newWorkerArray.filter((d, i) => d !== worker);
-    setNewWorkerArray(remainingArray);
-    console.log(remainingArray);
-  };
-
-  //======================================================================
-  const handleClickWorkers = () => {
-    setOpenWorkers((current) => !current);
-  };
-  const handleWorker = (details) => {
-    const array = [...newWorkerArray, details];
-    setNewWorkerArray(array);
-    handleClickWorkers();
-  };
 
   const handleSubmit = () => {
     updateServiceRequestById();
@@ -158,116 +125,21 @@ const Response = ({ individualServiceRequests }) => {
               />
             </div>
           </div>
-          <span className="fs16 fw700 white">Location:</span>
-          <div className="project--name--container mt8 mb24">
-            <div className="universal--input--forms--full">
-              <input
-                type="text"
-                placeholder="Location"
-                value={location}
-                className="create--request--input ml12"
-                onChange={(e) => setLocation(e.target.value)}
+          {jobsArray.map((item) => {
+            return (
+              <ResponseJobCards
+                workersData={workersData}
+                item={item}
+                setFinalisedJobsArray={setFinalisedJobsArray}
+                finalisedJobsArray={finalisedJobsArray}
               />
-            </div>
-          </div>
-          <div className="response--pickuptime--pax--box">
-            <div className="response--pickuptime--pax--inner--box">
-              <span className="fs16 fw700 white">Pick-up Time:</span>
-              <div className="project--name--container mt8 mb24">
-                <div className="universal--input--forms--smaller--half">
-                  <input
-                    type="text"
-                    placeholder="e.g. 7am"
-                    className="create--request--input ml12"
-                    onChange={(e) => setPickUpTime(e.target.value)}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="response--pickuptime--pax--inner--box">
-              <span className="fs16 fw700 white">Pax:</span>
-              <div className="project--name--container mt8 mb24">
-                <div className="universal--input--forms--smaller--half">
-                  <input
-                    type="text"
-                    placeholder="e.g. 10"
-                    className="create--request--input ml12"
-                    onChange={(e) => setPax(e.target.value)}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+            );
+          })}
 
-          <span className="fs16 fw700 white">Transport:</span>
-          <div className="project--name--container mt8 mb24">
-            <div className="universal--input--forms--full mb8">
-              <input
-                type="text"
-                placeholder="e.g. Safiku's Lorry"
-                className="create--request--input ml12"
-                onChange={(e) => setTransport(e.target.value)}
-              />
-            </div>
-          </div>
-
-          <span className="fs16 fw700 white">Workers:</span>
-          <div className="response--container mt8">
-            {newWorkerArray.length > 0 &&
-              newWorkerArray.map((worker) => {
-                return (
-                  <>
-                    <div className="universal--response--forms--full mb8">
-                      <span className="response--request--worker">
-                        {worker}
-                      </span>
-                      <img
-                        src={cross}
-                        alt="images"
-                        className="response--cross--button"
-                        onClick={() => {
-                          handleDelete(worker);
-                        }}
-                      />
-                    </div>
-                  </>
-                );
-              })}
-            {newWorkerArray.length === 0 && (
-              <span className="response--request--worker">
-                No workers selected
-              </span>
-            )}
-          </div>
-          <div className=" add--service--input--forms--full--container mb24">
-            <div
-              className="add--service--input--forms--full"
-              onClick={handleClickWorkers}
-            >
-              <span className="white fs14 fw300">Add workers</span>
-              <img src={downArrow} className="down--arrow" />
-            </div>
-            {openWorkers && (
-              <div className="add--service--input--forms--full--workers">
-                {workersData.map((worker) => {
-                  return (
-                    <div
-                      className="add--service--input--forms--full--workers--individual white fs16"
-                      onClick={() => {
-                        handleWorker(worker.name);
-                      }}
-                    >
-                      {worker.name}
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-          <span className="fs16 fw700 white">Total Manpower:</span>
+          {/* <span className="fs16 fw700 white">Total Manpower:</span>
           <div className="response--container mt8 mb24">
             <span className="fw700 fs56 white">{newWorkerArray.length}</span>
-          </div>
+          </div> */}
           <div className="response--container mt8 mb24">
             <div className="universal--response--forms--full mb8">
               <button

@@ -2,6 +2,7 @@ import React from "react";
 import tick from "./Assets/universal/tick.svg";
 
 const OverviewCard = ({ item, i, handleCardClick }) => {
+  console.log(item);
   return (
     <>
       <div className="homepage--header--container mb8">
@@ -43,7 +44,7 @@ const OverviewCard = ({ item, i, handleCardClick }) => {
                       <div className="individual--jobs--box">
                         <img src={tick} alt="images"></img>
                         <div className="individual--workers--box ml12">
-                          {x.workers.map((workers) => {
+                          {x.newWorkerArray.map((workers) => {
                             return (
                               <span className="fs16 fw300">{workers}</span>
                             );

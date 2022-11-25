@@ -15,7 +15,6 @@ const Submission = () => {
       });
       const data = await res.json();
       setServiceRequest(data);
-      console.log(data);
     } catch (e) {
       console.error(e);
     }
@@ -24,6 +23,8 @@ const Submission = () => {
   useEffect(() => {
     getServiceRequest();
   }, []);
+
+  console.log(serviceRequest);
 
   return (
     <div>
@@ -73,7 +74,7 @@ const Submission = () => {
                                 <div className="individual--jobs--box">
                                   <img src={tick} alt="images"></img>
                                   <div className="individual--workers--box ml12">
-                                    {x.workers.map((workers) => {
+                                    {x.newWorkerArray.map((workers) => {
                                       return (
                                         <span className="fs16 fw300">
                                           {workers}

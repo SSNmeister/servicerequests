@@ -358,7 +358,20 @@ body {
   display: flex;
   flex-direction: row;
 }
-
+.response--job--card--container {
+  background-color: rgb(209, 178, 0);
+  border-radius: 4px;
+  border: 1px black solid;
+  box-shadow: var(--shadowing);
+  padding: 8px;
+}
+.response--job--card--container--activated {
+  background-color: var(--green);
+  border-radius: 4px;
+  border: 1px black solid;
+  box-shadow: var(--shadowing);
+  padding: 8px;
+}
 .universal--input--forms--half {
   display: flex;
   align-items: center;
@@ -705,7 +718,7 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 370px;
+  width: 350px;
   height: 56px;
   background-color: var(--blue);
   border-radius: 4px;
@@ -745,6 +758,32 @@ body {
   border: 1px black solid;
   box-shadow: var(--shadowing);
   cursor: pointer;
+}
+.button--container {
+  display: flex;
+  justify-content: center;
+}
+.update--response--button {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 700;
+  width: 300px;
+  height: 56px;
+  background-color: var(--blue);
+  border-radius: 4px;
+  border: 1px black solid;
+  box-shadow: var(--shadowing);
+  cursor: pointer;
+}
+.update--response--button:hover {
+  background-color: #0040ff;
+}
+.update--response--button:disabled {
+  background-color: rgb(76, 76, 76);
+  color: var(--green);
+  cursor: default;
 }
 
 /* ====================================Confirmation Modal====================================== */
